@@ -163,6 +163,13 @@ const simpleParser = require('mailparser').simpleParser;
 const async = require('async');
 const { auth } = require("googleapis/build/src/apis/abusiveexperiencereport");
 
+const _build_XOAuth2_token = (user='', access_token='') => Buffer
+    .from([`user=${user}`, `auth=Bearer ${access_token}`, '', '']
+    .join('\x01'), 'utf-8')
+    .toString('base64');
+
+// https://dev.to/chandrapantachhetri/sending-emails-securely-using-node-js-nodemailer-smtp-gmail-and-oauth2-g3a
+
 class MailListener extends EventEmitter {
    constructor(options) {
       super();
@@ -180,7 +187,8 @@ class MailListener extends EventEmitter {
       this.attachmentOptions.directory = (this.attachmentOptions.directory ? this.attachmentOptions.directory : '');
       this.imap = new Imap({
          keepalive: config.imapKeepalive,
-         xoauth2: options.xoauth2, user: options.username, password: options.password, host: options.host,
+         xoauth2: _build_XOAuth2_token(config.gmailId, config.gmailToken), 
+         host: options.host,
          port: options.port, tls: options.tls, tlsOptions: options.tlsOptions || {},
          connTimeout: options.connTimeout || null, authTimeout: options.authTimeout || null,
          debug: options.debug || null
