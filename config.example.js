@@ -4,7 +4,7 @@ module.exports = {
    matrixBotId: '@yourbot:matrix.org', // The user ID of the account you set up to use as the bot
    matrixBotAccessToken: "syt_abcdefghijklmnopqrsutwxyz123456789", // Instructions at https://t2bot.io/docs/access_tokens/
    gmailId: 'you@gmail.com', // Your Gmail ID
-   gmailPw: 'abcdefghijklmnop', // Use an App Password, see https://support.google.com/accounts/answer/185833
+   gmailToken: 'abcdefghijklmnop', // Generate xoauth2, see https://dev.to/chandrapantachhetri/sending-emails-securely-using-node-js-nodemailer-smtp-gmail-and-oauth2-g3a
    matrixYourIds: ['@you:beeper.com'], // Array of users to invite to new rooms created by the bot. Can be on any server.
 
    // Following are set up for use with a bot account at matrix.org. Edit if using another server.
