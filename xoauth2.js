@@ -1,5 +1,5 @@
-const config = require('./config.js')
 const { OAuth2Client } = require('google-auth-library');
+const config = require('./config.js')
 const Imap = require('imap');
 const base64 = require('base64-js');
 const fs = require('fs');
@@ -10,6 +10,8 @@ const clientSecret = config.clientSecret;
 const refreshToken = config.refreshToken;
 const email = config.email;
 
+
+console.log(email);
 // Create an OAuth2 client with the given credentials
 const oAuth2Client = new OAuth2Client({
     clientId,
@@ -28,5 +30,12 @@ async function refreshAccessToken() {
 
         // Save the encoded token to a file
         fs.writeFileSync('encodedToken.txt', encodedToken, 'utf-8');
+        
+    } catch (error) {
+        console.error('Error refreshing access token:', error.message);
     }
-  refreshAccessToken();
+}
+
+module.exports = {
+refreshAccessToken,
+};
