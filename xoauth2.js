@@ -8,6 +8,7 @@ const fs = require('fs');
 const clientId = config.clientId;
 const clientSecret = config.clientSecret;
 const refreshToken = config.refreshToken;
+const email = config.email;
 
 // Create an OAuth2 client with the given credentials
 const oAuth2Client = new OAuth2Client({
@@ -22,7 +23,7 @@ oAuth2Client.setCredentials({ refresh_token: refreshToken });
 async function refreshAccessToken() {
     try {
         const { token } = await oAuth2Client.getAccessToken();
-        const xoauth2 = `user=${(config.email)}\u0001auth=Bearer ${token}\u0001\u0001`;
+        const xoauth2 = `user=${email}\u0001auth=Bearer ${token}\u0001\u0001`;
         const encodedToken = base64.fromByteArray(Buffer.from(xoauth2, 'utf-8'));
 
         // Save the encoded token to a file
