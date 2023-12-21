@@ -1,6 +1,7 @@
 /**
  * @ Modified time: 2023-10-08 20:31:13
  */
+const { refreshAccessToken } = require('./xoauth2.js');
 const fs = require('fs');
 const filePath = 'encodedToken.txt';
 const config = require('./config.js')
@@ -15,6 +16,8 @@ const Log = (text, color = White) => {
    }
 }
 Log(JP(config)) /// added
+
+refreshAccessToken();
 
 //! Replies via gmail-send
 
