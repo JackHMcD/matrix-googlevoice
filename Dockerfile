@@ -1,14 +1,9 @@
-FROM node:19-slim
-
+FROM alpine
+RUN apk add --update nodejs npm
 WORKDIR /usr/src/app
-
-COPY package.json ./
-
-COPY config.example.js config/config.js
-COPY matrix-googlevoice-bot.js matrix-googlevoice-bot.js
+COPY package*.json ./
+# Install Node.js dependencies
 RUN npm install
-
-VOLUME /usr/src/app/config
-ENV DATA_PATH="/storage"
-
-CMD ["node", "matrix-googlevoice"]
+# Copy the rest of the application code to the working directory
+COPY . .
+CMD ["node", "matrix-googlevoice-bot.js"]
